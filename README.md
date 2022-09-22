@@ -4,6 +4,10 @@
  Create a network graph of your friends on a social media.  
  Inspired by [humboldt123](https://github.com/humboldt123/mutuals)
 
+## Warning ⚠️
+
+This project uses your discord token to scan your mutual friends list. However, never, ever, under any circumstances give your token to anybody as it would give them full access to your account. Before running this program, I highly recommend reading through the code to make sure it is something you trust.
+
 ## Requirements
 
 - Python 3.10+ with pip (you can download it [here](https://www.python.org/downloads/))

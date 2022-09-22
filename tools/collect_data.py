@@ -11,7 +11,6 @@ AVATARS_LOCATION = root + "/data/avatars/"
 LINK_API = r"https://discordapp.com/api/v9"
 
 
-
 def get_data_friends():
     """ Get data from friends, with id, username, avatarUrl and connections (a list of mutual friends id)
 
@@ -92,6 +91,7 @@ def download_avatars():
             f.write(avatar.content)
 
     return False if len(img_errors) == 0 else img_errors
+
 
 def collect_data():
     write_data()
