@@ -3,9 +3,6 @@ import connections from "../data/data.json" assert { type: "json" };
 import options from "../options.json" assert { type: "json" };
 
 
-
-console.log(typeof(connections));
-
 var data = {nodes: [], edges: []};
 var links = new Set();
 
