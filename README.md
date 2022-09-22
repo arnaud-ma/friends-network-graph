@@ -21,6 +21,10 @@ Navigate to it with a terminal then run ```pip -r requirements.txt``` to install
 
 Follow the instructions displayed in the terminal. Creating the graph can take several tens of seconds so please wait when a blank page appears.
 
+You may be asked to give your discord token.  
+⚠️BEFORE DOING ANYTHING READ THE WARNING SECTION ⚠️  
+To get it, log into Discord on a browser. Open Developer Tools, then click Network. Press F5 on your keyboard to reload the page. Type /api into the Filter field, then click library. Click the Headers tab, then scroll down to authorization to find your Discord token.
+
 ## Personalization
 
 You can personalize the graph by editing the ```options.json``` file. You can find all possible customizations in the documentation [here](https://visjs.github.io/vis-network/docs/network/#options).  
