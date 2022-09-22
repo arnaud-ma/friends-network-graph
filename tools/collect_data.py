@@ -2,13 +2,20 @@ from tqdm import tqdm
 from tools.utils import hidden_input, get_project_root
 import json
 import requests
-
+import os
 
 root = get_project_root()
-DATA_LOCATION = root + "/data/data.json"
+DATA_LOCATION = root + "/data"
+DATA_FILE_LOCATION = DATA_LOCATION + "/data.json"
 AVATARS_LOCATION = root + "/data/avatars/"
 
 LINK_API = r"https://discordapp.com/api/v9"
+
+
+if not os.path.isdir(DATA_LOCATION):
+    os.mkdir(DATA_LOCATION)
+if not os.path.isdir(AVATARS_LOCATION):
+    os.mkdir(AVATARS_LOCATION)
 
 
 def get_data_friends():
@@ -64,7 +71,7 @@ def write_data():
     """Write data of each friend in a big json file
     """
     data = get_data_friends()
-    with open(DATA_LOCATION, "w", encoding="utf-8") as f:
+    with open(DATA_FILE_LOCATION, "w", encoding="utf-8") as f:
         json.dump(data, f)
 
 
@@ -75,8 +82,8 @@ def download_avatars():
     """
     img_errors = dict()
 
-    with open(DATA_LOCATION, "r") as f:
-        data = json.load(open(DATA_LOCATION, "r", encoding="utf-8"))
+    with open(DATA_FILE_LOCATION, "r") as f:
+        data = json.load(open(DATA_FILE_LOCATION, "r", encoding="utf-8"))
 
     for user in tqdm(data, desc="Downloading avatars"):
         avatarUrl = data[user]["avatarUrl"]
