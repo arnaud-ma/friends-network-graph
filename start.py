@@ -12,7 +12,7 @@ def main():
 
     while result not in list_good_entry:
         print("Please enter a valid number (", *list_good_entry, ")")
-        result = int(input(entry_string))
+        result = input(entry_string)
 
     match result:
         case "1":
