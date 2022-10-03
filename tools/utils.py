@@ -20,9 +20,7 @@ def hidden_input(str, char="*"):
         return getpass(str)
 
 
-def get_project_root():
-    """Returns project root folder."""
-    return os.path.dirname(os.path.abspath("start.py"))
-
-
-print(get_project_root())
+def check_folder(*folders):
+    for folder in folders:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)

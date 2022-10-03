@@ -1,4 +1,5 @@
-from tools import collect_data, create_graph
+from tools.data_filter import collect_data
+from tools import graph
 
 
 def main():
@@ -15,12 +16,20 @@ def main():
         result = input(entry_string)
 
     match result:
+        
         case "1":
             print("Collecting data...")
             collect_data.collect_data()
+            
         case "2":
             print("Creating graph...")
-            create_graph.connect()
+            include_user = input("Do you want to include yourself in the graph ? (y/n) ")
+            while include_user not in ["y", "n"]:
+                print("Please enter a valid answer (y/n)")
+                include_user = input("Do you want to include yourself in the graph ? (y/n) ")
+            include_user = include_user == "y"
+            graph.graph(include_user)
+            
         case "3":
             print("Exiting...")
             exit()
