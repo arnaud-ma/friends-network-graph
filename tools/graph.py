@@ -6,6 +6,7 @@ from pyvis.network import Network
 from tools.config import expr_size
 from tools.config import GRAPH_PATH, DATA_FILE_PATH, DISPLAYED_OPTIONS
 
+
 def create_graph(include_user=False):
     with open(DATA_FILE_PATH, "r") as f:
         data = json.load(f)

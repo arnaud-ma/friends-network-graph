@@ -1,5 +1,6 @@
 from tqdm import tqdm
-from tools.utils import hidden_input, check_folder
+from pwinput import pwinput
+from tools.utils import check_folder
 from tools.data_filter.utils_data import get_data_from_api, filter_friend_data
 import json
 import requests
@@ -13,7 +14,7 @@ def get_data_friends():
         dict: data
     """
 
-    TOKEN = hidden_input("Enter your token: ")
+    TOKEN = pwinput("Enter your token: ", mask="*")
     HEADER = {"authorization": TOKEN}
 
     content_friends = get_data_from_api(rf"{LINK_API}/users/@me/relationships", HEADER)
