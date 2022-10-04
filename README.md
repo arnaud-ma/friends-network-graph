@@ -32,3 +32,11 @@ You can edit the ``config.py`` file in the tools folder to change several things
 - output file paths (data, html page etc.)
 - The size of the nodes according to the number of connections with the``expr_size`` function
 - Display or not on the page a whole bunch of editable options directly next to the graph
+
+For the last point, you can see the documentation of all the options [here](https://visjs.github.io/vis-network/docs/network/), more particularly:
+
+- [nodes](https://visjs.github.io/vis-network/docs/network/nodes.html)
+- [edges](https://visjs.github.io/vis-network/docs/network/edges.html)
+- [physics](https://visjs.github.io/vis-network/docs/network/physics.html)
+- [interaction](https://visjs.github.io/vis-network/docs/network/interaction.html)
+- [layout](https://visjs.github.io/vis-network/docs/network/layout.html)

@@ -4,11 +4,12 @@ from tools.utils import full_input
 
 
 full_tree = {
-    "char": """ What do you want to do ? If it's your first time, you need to collect the data first
-                    1. Collect the data
-                    2. Create the graph
-                    3. Exit
-                    """,
+    "char": (
+        "\n What do you want to do ? If it's your first time, you need to collect the data first \n"
+        "\t 1. Collect the data \n"
+        "\t 2. Create the graph \n"
+        "\t 3. Exit \n"
+    ),
     "char_wrong": "Please enter a valid number ( 1 2 3 )",
     "valid": {
         "1": {"char": "Collecting data...", "func": collect_data, "kwargs": {}},

@@ -30,7 +30,26 @@ def create_graph(include_user=False):
             )
         )
 
-    edge_option = {"color": {"color": "grey", "highlight": "red"}, "font": "20px arial black"}
+    edge_option = {
+        "color": {"color": "grey", "highlight": "red"},
+        "selectionWidth": 4,
+    }
+
+    node_option = {
+        "borderWidthSelected": 5,
+        "color": {
+            "border": "black",
+            "highlight": {
+                "border": "blue",
+            },
+        },
+        "font": {
+            "color": "black",
+            "size": 20,
+            "face": "arial",
+            "strokeWidth": 2,
+        },
+    }
 
     edges = [
         (friend["id"], connection)
@@ -41,7 +60,7 @@ def create_graph(include_user=False):
     ]
 
     G = nx.Graph()
-    G.add_nodes_from(nodes)
+    G.add_nodes_from(nodes, **node_option)
     G.add_edges_from(edges, **edge_option)
 
     nt = Network(width="60%")  # Width of 60% to display options buttons on the right of the graph
@@ -49,6 +68,14 @@ def create_graph(include_user=False):
     if len(DISPLAYED_OPTIONS) > 0:
         nt.show_buttons(filter_=DISPLAYED_OPTIONS)
     nt.toggle_physics(False)  # physics is disabled at the beginning to avoid a big loading time
+    nt.barnes_hut(
+        gravity=-5000,
+        central_gravity=0.3,
+        spring_length=20,
+        spring_strength=0.01,
+        damping=0.09,
+        overlap=0,
+    )
 
     return nt
 
