@@ -13,7 +13,9 @@ GRAPH_PATH = ROOT + "/graph.html"
 
 
 """ Options displayed on the page. There can be "physics", "nodes", "edges", "interaction", "layout", "configure" and "navigation" """
-DISPLAYED_OPTIONS = ["physics",]
+DISPLAYED_OPTIONS = [
+    "physics",
+]
 
 
 # Size of a node in function of the number of connections

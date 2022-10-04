@@ -1,7 +1,7 @@
 from tqdm import tqdm
 from pwinput import pwinput
 from tools.utils import check_folder
-from tools.data_filter.utils_data import get_data_from_api, filter_friend_data
+from .utils_data import get_data_from_api, filter_friend_data
 import json
 import requests
 from tools.config import DATA_FILE_PATH, AVATARS_PATH, DATA_PATH, LINK_API

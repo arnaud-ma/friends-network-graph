@@ -65,7 +65,7 @@ def connect():
     webbrowser.open("file://" + GRAPH_PATH)
 
 
-def graph(include_user=False):
+def display_graph(include_user=False):
     nt = create_graph(include_user)
     write_html_graph(nt)
     connect()
