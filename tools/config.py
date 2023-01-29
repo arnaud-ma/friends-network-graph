@@ -1,15 +1,26 @@
 import os
 import math
 
-# Api
-LINK_API = "https://discordapp.com/api/v9"
+apps = ["discord"]
 
-# Path
+# Api
+API_LINKS = {
+    "discord": "https://discord.com/api/v9",
+}
+
+# Paths
 ROOT = os.path.dirname(os.path.realpath("start.py"))
-DATA_PATH = ROOT + "/data"
-DATA_FILE_PATH = ROOT + "/data/data.json"
-AVATARS_PATH = ROOT + "/data/avatars/"
-GRAPH_PATH = ROOT + "/graph.html"
+DATA_FOLDER = ROOT + "/data"
+
+paths = dict()
+for app in apps:
+    folder = DATA_FOLDER + "/" + app
+    paths[app] = {
+        "folder": folder,
+        "data_file_path": folder + "/data.json",
+        "avatars_path":   folder + "/avatars/",
+        "graph_path":     folder + "/graph.html",
+    }
 
 
 """ Options displayed on the page. There can be "physics", "nodes", "edges", "interaction", "layout", "configure" and "navigation" """

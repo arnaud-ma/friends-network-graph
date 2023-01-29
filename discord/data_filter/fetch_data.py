@@ -1,10 +1,13 @@
-from tqdm import tqdm
-from pwinput import pwinput
-from tools.utils import check_folder
-from .utils_data import get_data_from_api, filter_friend_data
 import json
+
 import requests
-from tools.config import DATA_FILE_PATH, AVATARS_PATH, DATA_PATH, LINK_API
+from pwinput import pwinput
+from tqdm import tqdm
+
+from discord.constants import API_LINK, AVATARS_PATH, DATA_FILE_PATH, FOLDER
+from tools.utils import check_folder
+
+from .utils_data import filter_friend_data, get_data_from_api
 
 
 def get_data_friends():
@@ -17,25 +20,29 @@ def get_data_friends():
     TOKEN = pwinput("Enter your token: ", mask="*")
     HEADER = {"authorization": TOKEN}
 
-    content_friends = get_data_from_api(rf"{LINK_API}/users/@me/relationships", HEADER)
+    content_friends = get_data_from_api(rf"{API_LINK}/users/@me/relationships", HEADER)
     friends = [content_friends[i]["user"] for i in range(len(content_friends))]
 
     data = dict()
 
     # Loop through all friends
-    for friend in tqdm(friends, desc="collecting friends data"):
+    for friend in tqdm(friends, desc="fetching friends data"):
         data = filter_friend_data(friend, data, HEADER)
-
+    all_friends = set(data.keys())
     # Add the user
-    user = get_data_from_api(rf"{LINK_API}/users/@me", HEADER)
+    user = get_data_from_api(rf"{API_LINK}/users/@me", HEADER)
     data = filter_friend_data(user, data, HEADER, is_user=True)
+
+    # Fix a bug where friends are in /users/@me/relationships but not in /users/@me
+    connections_user = set(data[user["id"]]["connections"]) | all_friends
+    data[user["id"]]["connections"] = list(connections_user)
 
     return data
 
 
 def write_data():
     """Write data of each friend in a big json file"""
-    check_folder(DATA_PATH)
+    check_folder(FOLDER)
     data = get_data_friends()
     with open(DATA_FILE_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f)
@@ -46,7 +53,7 @@ def download_avatars():
     Returns:
         bool or list : False if no error, list of errors if error to download some images : dict{username: image_url}
     """
-    check_folder(DATA_PATH, AVATARS_PATH)
+    check_folder(FOLDER, AVATARS_PATH)
     img_errors = dict()
     with open(DATA_FILE_PATH, "r") as f:
         data = json.load(open(DATA_FILE_PATH, "r", encoding="utf-8"))
@@ -66,7 +73,7 @@ def download_avatars():
     return False if len(img_errors) == 0 else img_errors
 
 
-def collect_data():
+def fetch_data():
     write_data()
     img_errors = download_avatars()
     if img_errors:
