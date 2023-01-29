@@ -1,7 +1,6 @@
-from tools.data_filter import collect_data
-from tools.graph import display_graph
+from discord.data_filter.fetch_data import fetch_data
+from discord.graph import display_graph
 from tools.utils import full_input
-
 
 full_tree = {
     "char": (
@@ -12,7 +11,7 @@ full_tree = {
     ),
     "char_wrong": "Please enter a valid number ( 1 2 3 )",
     "valid": {
-        "1": {"char": "Collecting data...", "func": collect_data, "kwargs": {}},
+        "1": {"char": "Collecting data...", "func": fetch_data, "kwargs": {}},
         "2": {
             "char": "Do you want to include yourself in the graph ? (y/n) ",
             "char_wrong": "Please enter a valid answer (y/n)",

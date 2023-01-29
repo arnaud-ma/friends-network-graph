@@ -4,7 +4,7 @@ import os
 def check_folder(*folders):
     for folder in folders:
         if not os.path.isdir(folder):
-            os.mkdir(folder)
+            os.makedirs(folder)
 
 
 def full_input(char, char_wrong, valid):

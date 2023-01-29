@@ -1,5 +1,5 @@
-import os
 import math
+import os
 
 apps = ["discord"]
 
@@ -18,8 +18,8 @@ for app in apps:
     paths[app] = {
         "folder": folder,
         "data_file_path": folder + "/data.json",
-        "avatars_path":   folder + "/avatars/",
-        "graph_path":     folder + "/graph.html",
+        "avatars_path": folder + "/avatars/",
+        "graph_path": folder + "/graph.html",
     }
 
 
