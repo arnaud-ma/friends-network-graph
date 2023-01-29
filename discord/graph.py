@@ -16,7 +16,7 @@ def create_graph(include_user=False):
 
     if include_user:
         user_id = next(friend_id for friend_id, friend in data.items() if friend["is_user"])
-        for friend in data.values(): # user is not include in connections in data.json by default
+        for friend in data.values():  # user is not include in connections in data.json by default
             if user_id not in friend["connections"] and friend["id"] != user_id:
                 friend["connections"].append(user_id)
 
@@ -26,6 +26,8 @@ def create_graph(include_user=False):
     nodes = []
     for friend in data.values():
         nb_connections = len(friend["connections"])
+        if not include_user:
+            nb_connections += 1
         nodes.append(
             (
                 friend["id"],
