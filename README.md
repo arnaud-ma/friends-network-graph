@@ -17,7 +17,7 @@ This project uses your discord token to scan your mutual friends list. However, 
 
 After installing Python, download this repository [here](https://github.com/arnaud-ma/friends-network-graph/archive/refs/heads/main.zip) or clone it.  
 
-Navigate to it with a terminal then run ```pip -r requirements.txt``` to install its dependencies and ```py start.py``` to run it.
+Navigate to it with a terminal then run ```pip -r requirements.txt``` to install its dependencies and ```python start.py``` to run it.
 
 Follow the instructions displayed in the terminal.
 
