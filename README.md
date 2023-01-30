@@ -40,3 +40,10 @@ For the last point, you can see the documentation of all the options [here](http
 - [physics](https://visjs.github.io/vis-network/docs/network/physics.html)
 - [interaction](https://visjs.github.io/vis-network/docs/network/interaction.html)
 - [layout](https://visjs.github.io/vis-network/docs/network/layout.html)
+
+## Contributing
+
+If you want to contribute to this project, feel free to open a pull request or an issue.
+
+If you want to add a new social media, you can create a new folder with the name of the social media in the main folder.
+Then update the ``tree_input.py`` to add the new social media in the output tree.
