@@ -10,19 +10,30 @@ from discord.constants import DATA_FILE_PATH, GRAPH_PATH
 from tools.config import DISPLAYED_OPTIONS, expr_size
 
 
-def create_graph(include_user=False):
+def load_data():
+    """Load data from data.json file"""
     with open(DATA_FILE_PATH, "r") as f:
         data = json.load(f)
+    return data
 
-    if include_user:
-        user_id = next(friend_id for friend_id, friend in data.items() if friend["is_user"])
-        for friend in data.values():  # user is not include in connections in data.json by default
-            if user_id not in friend["connections"] and friend["id"] != user_id:
-                friend["connections"].append(user_id)
 
-    else:
-        data = {friend_id: friend for friend_id, friend in data.items() if not friend["is_user"]}
+def include_user_in_data(data: dict) -> dict:
+    """Add user to data.json file"""
+    user_id = next(friend_id for friend_id, friend in data.items() if friend["is_user"])
+    for friend in data.values():  # user is not include in connections in data.json by default
+        if user_id not in friend["connections"] and friend["id"] != user_id:
+            friend["connections"].append(user_id)
+    return data
 
+
+def exclude_user_from_data(data: dict) -> dict:
+    """Remove user from data.json file"""
+    data = {friend_id: friend for friend_id, friend in data.items() if not friend["is_user"]}
+    return data
+
+
+def create_nodes(data: dict, include_user: bool = False) -> list:
+    """Create nodes from data.json file"""
     nodes = []
     for friend in data.values():
         nb_connections = len(friend["connections"])
@@ -40,6 +51,28 @@ def create_graph(include_user=False):
                 },
             )
         )
+    return nodes
+
+
+def create_edges(data: dict) -> list:
+    """Create edges from data.json file"""
+    edges = []
+    for friend in data.values():
+        for connection in friend["connections"]:
+            edges.append((friend["id"], connection))
+    return edges
+
+
+def create_graph(include_user=False):
+    data = load_data()
+
+    if include_user:
+        data = include_user_in_data(data)
+    else:
+        data = exclude_user_from_data(data)
+
+    nodes = create_nodes(data, include_user)
+    edges = create_edges(data)
 
     edge_option = {
         "color": {"color": "grey", "highlight": "red"},
@@ -61,11 +94,6 @@ def create_graph(include_user=False):
             "strokeWidth": 2,
         },
     }
-
-    edges = []
-    for friend in data.values():
-        for connection in friend["connections"]:
-            edges.append((friend["id"], connection))
 
     G = nx.Graph()
     G.add_nodes_from(nodes, **node_option)
